@@ -21,6 +21,7 @@ namespace WebPostgreSQL.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
+            // todo: Implementar o cadastro de usuários
             if (modelLogin.Email == "admin@gmail.com" && modelLogin.PassWord == "admin")
             {
                 List<Claim> claims = new List<Claim>() {
