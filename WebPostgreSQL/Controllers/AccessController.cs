@@ -3,11 +3,20 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using WebPostgreSQL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebPostgreSQL.Controllers
 {
     public class AccessController : Controller
     {
+
+        private readonly Contexto _context;
+
+        public AccessController(Contexto context)
+        {
+            _context = context;
+        }
+
         public IActionResult Login()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -21,6 +30,8 @@ namespace WebPostgreSQL.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
+            var testecontext = _context.usuarios.ToListAsync();
+
             // todo: Implementar o cadastro de usuários
             if (modelLogin.Email == "admin@gmail.com" && modelLogin.PassWord == "admin")
             {

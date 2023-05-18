@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 
@@ -20,7 +21,7 @@ namespace WebPostgreSQL.Controllers
 
         // GET: Produtos
         public async Task<IActionResult> Index()
-        {
+        {// todo orderby
               return _context.produtos != null ? 
                           View(await _context.produtos.ToListAsync()) :
                           Problem("Entity set 'Contexto.produtos'  is null.");
@@ -135,7 +136,7 @@ namespace WebPostgreSQL.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Produtos/Delete/5 todo delete para excluir
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -158,5 +159,8 @@ namespace WebPostgreSQL.Controllers
         {
           return (_context.produtos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        //criar uma view para exibir uma tela ou criar um relatório
     }
 }
