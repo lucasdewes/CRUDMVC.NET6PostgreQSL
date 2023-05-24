@@ -2,25 +2,25 @@ using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-var builder = WebApplication.CreateBuilder(args);
+var sqlConnectionStringBuilder = WebApplication.CreateBuilder(args);
 
 // Add serviço no container.
-builder.Services.AddControllersWithViews();
+sqlConnectionStringBuilder.Services.AddControllersWithViews();
 
 //Add a parte de Login
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+sqlConnectionStringBuilder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
 {
     option.LoginPath = "/Access/Login";
     option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
 });
 
 
-builder.Services.AddEntityFrameworkNpgsql()
+sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;"));
     //.AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=CRUD_POSTGRE;User Id=postgres;Password=lucasdewes10;"));
 
 
-var app = builder.Build();
+var app = sqlConnectionStringBuilder.Build();
 
 // COnfigura the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
