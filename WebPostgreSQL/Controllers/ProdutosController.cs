@@ -21,10 +21,10 @@ namespace WebPostgreSQL.Controllers
 
         // GET: Produtos
         public async Task<IActionResult> Index()
-        {// todo orderby
+        {                                               // FEITO: Ordernar por Nome!
               return _context.produtos != null ? 
-                          View(await _context.produtos.ToListAsync()) :
-                          Problem("Entity set 'Contexto.produtos'  is null.");
+                          View(await _context.produtos.OrderBy(x => x.Nome).ToListAsync()) :
+                          Problem("Set da Entidade 'Contexto.produtos'  é null.");
         }
 
         // GET: Produtos/Details/5
@@ -52,7 +52,7 @@ namespace WebPostgreSQL.Controllers
         }
 
         // POST: Produtos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // Para proteger de ataques overposting, ativa as propriedades especificas que deseja bind.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,7 +84,7 @@ namespace WebPostgreSQL.Controllers
         }
 
         // POST: Produtos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // Para proteger de ataques overposting, ativa as propriedades especificas que deseja bind.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -136,14 +136,14 @@ namespace WebPostgreSQL.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5 todo delete para excluir
+        // POST: Produtos/Delete/5 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.produtos == null)
             {
-                return Problem("Entity set 'Contexto.produtos'  is null.");
+                return Problem("Entidade set 'Contexto.produtos'  é null.");
             }
             var produto = await _context.produtos.FindAsync(id);
             if (produto != null)
@@ -159,8 +159,5 @@ namespace WebPostgreSQL.Controllers
         {
           return (_context.produtos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
-
-        //criar uma view para exibir uma tela ou criar um relatório
     }
 }

@@ -30,9 +30,11 @@ namespace WebPostgreSQL.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
-            var testecontext = _context.usuarios.ToListAsync();
+            //var testecontext = _context.usuarios.ToListAsync();
+            string sSql = @"SELECT * FROM usuario";
+            IQueryable<Usuario> testeFromSqlRaw = _context.usuarios.FromSqlRaw(sSql);  // FromSqlRaw é sujeito a sql Injection, usar somente quando não recebe interpolação de fora
 
-            // todo: Implementar o cadastro de usuários
+            // todo: Implementar validação de usuários
             if (modelLogin.Email == "admin@gmail.com" && modelLogin.PassWord == "admin")
             {
                 List<Claim> claims = new List<Claim>() {

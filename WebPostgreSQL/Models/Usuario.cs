@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace WebPostgreSQL.Models
 {
-    public class Usuarios
+    public class Usuario
     {
 
         [Column("Id")]
