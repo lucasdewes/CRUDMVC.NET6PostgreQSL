@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Build.Framework;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 
@@ -22,20 +16,20 @@ namespace WebPostgreSQL.Controllers
         // GET: Produtos
         public async Task<IActionResult> Index()
         {                                               // FEITO: Ordernar por Nome!
-              return _context.produtos != null ? 
-                          View(await _context.produtos.OrderBy(x => x.Nome).ToListAsync()) :
-                          Problem("Set da Entidade 'Contexto.produtos'  é null.");
+            return _context.Produtos != null ?
+                        View(await _context.Produtos.OrderBy(x => x.Nome).ToListAsync()) :
+                        Problem("Set da Entidade 'Contexto.produtos'  é null.");
         }
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.produtos == null)
+            if (id == null || _context.Produtos == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.produtos
+            var produto = await _context.Produtos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (produto == null)
             {
@@ -70,12 +64,12 @@ namespace WebPostgreSQL.Controllers
         // GET: Produtos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.produtos == null)
+            if (id == null || _context.Produtos == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.produtos.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
             {
                 return NotFound();
@@ -121,12 +115,12 @@ namespace WebPostgreSQL.Controllers
         // GET: Produtos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.produtos == null)
+            if (id == null || _context.Produtos == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.produtos
+            var produto = await _context.Produtos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (produto == null)
             {
@@ -141,23 +135,23 @@ namespace WebPostgreSQL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.produtos == null)
+            if (_context.Produtos == null)
             {
                 return Problem("Entidade set 'Contexto.produtos'  é null.");
             }
-            var produto = await _context.produtos.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(id);
             if (produto != null)
             {
-                _context.produtos.Remove(produto);
+                _context.Produtos.Remove(produto);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProdutoExists(int id)
         {
-          return (_context.produtos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Produtos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

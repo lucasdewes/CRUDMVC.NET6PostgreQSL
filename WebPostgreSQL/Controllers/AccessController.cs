@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebPostgreSQL.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace WebPostgreSQL.Controllers
 {
     public class AccessController : Controller
     {
-
         private readonly Contexto _context;
 
         public AccessController(Contexto context)
@@ -30,35 +28,38 @@ namespace WebPostgreSQL.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
-            //var testecontext = _context.usuarios.ToListAsync();
-            string sSql = @"SELECT * FROM usuario";
-            IQueryable<Usuario> testeFromSqlRaw = _context.usuarios.FromSqlRaw(sSql);  // FromSqlRaw é sujeito a sql Injection, usar somente quando não recebe interpolação de fora
-
-            // todo: Implementar validação de usuários
-            if (modelLogin.Email == "admin@gmail.com" && modelLogin.PassWord == "admin")
+            try
             {
-                List<Claim> claims = new List<Claim>() {
-                    new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
-                    new Claim("OtherProperties","Example Role")
-                };
-
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
-                    CookieAuthenticationDefaults.AuthenticationScheme);
-
-                AuthenticationProperties properties = new AuthenticationProperties()
+                List<Dictionary<string, object>> testeFromSqlRaw = await Consultas.GetConsultaLoginAsync(modelLogin.PassWord, modelLogin.Email);  // FromSqlRaw é sujeito a sql Injection, usar somente quando não recebe interpolação de fora
+                if (testeFromSqlRaw.Count() > 0)
                 {
-                    AllowRefresh = true,
-                    IsPersistent = modelLogin.KeepLoggedIn
-                };
+                    List<Claim> claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, modelLogin.Email),
+                        new Claim("OtherProperties","Example Role")
+                    };
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity), properties);
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                return RedirectToAction("Index", "Home");
+                    AuthenticationProperties properties = new AuthenticationProperties()
+                    {
+                        AllowRefresh = true,
+                        IsPersistent = modelLogin.KeepLoggedIn
+                    };
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ViewData["ValidateMessage"] = "Usuário não encontrado ou senha incorreta";
+                return View();
             }
-
-            ViewData["ValidateMessage"] = "user not found";
-            return View();
+            catch (Exception ex)
+            {
+                ViewData["ValidateMessage"] = "Erro no Login(): " + ex.Message;
+                return View();
+            }
         }
     }
 }

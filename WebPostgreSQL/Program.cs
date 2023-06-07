@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 var sqlConnectionStringBuilder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +14,11 @@ sqlConnectionStringBuilder.Services.AddAuthentication(CookieAuthenticationDefaul
     option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
 });
 
+const string _stringDeConnexao = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
 sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;"));
-    //.AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=CRUD_POSTGRE;User Id=postgres;Password=lucasdewes10;"));
+    .AddDbContext<Contexto>(option => option.UseNpgsql(_stringDeConnexao));
+//.AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=CRUD_POSTGRE;User Id=postgres;Password=lucasdewes10;"));
 
 
 var app = sqlConnectionStringBuilder.Build();
@@ -42,6 +43,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Access}/{action=Login}/{id?}"); //alterado para Login
-    //pattern: "{controller=Home}/{action=Index}/{id?}");
+                                                          //pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

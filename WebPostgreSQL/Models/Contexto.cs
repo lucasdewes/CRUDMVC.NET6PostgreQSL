@@ -8,7 +8,8 @@ namespace WebPostgreSQL.Models
         {
         }
 
-        public DbSet<Produto>produtos { get; set; }
-        public DbSet<Usuario>usuarios { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<RegistroOrdenha> RegistroOrdenhas { get; set; }
     }
 }

@@ -1,40 +1,108 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient.Server;
+using Npgsql;
 
 namespace WebPostgreSQL.Models
 {
     public class Consultas
     {
-        public List<Dictionary<string, object>> GetUsuariosParaLogin()
+        public static async Task<List<Dictionary<string, object>>> RodarComandoSQL(string sSQL)
         {
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
+            #region Abre connection
 
-            sqlConnectionStringBuilder.ConnectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
-            //sqlConnectionStringBuilder.DataSource = "<your_server.database.windows.net>";
-            //sqlConnectionStringBuilder.UserID = "<admin>";
-            //sqlConnectionStringBuilder.Password = "<admin>";
-            //sqlConnectionStringBuilder.InitialCatalog = "SISTEMALEITE";
+            // Configurar a string de conexão com o banco de dados
+            string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
-            using (SqlConnection connection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
+            // Criar a conexão
+            using var connection = new NpgsqlConnection(connectionString);
+            //connection.Open();
+            await connection.OpenAsync();
+
+            #endregion Abre connection
+
+            #region Cria a string sql e faz a consulta
+            // Criar o comando SQL
+            using var command = connection.CreateCommand();
+            //monta a string sql
+            command.CommandText = sSQL;
+
+            // Executar o comando e le os resultados
+            using var reader = command.ExecuteReader();
+
+            #endregion Cria a string sql e faz a consulta
+
+            #region formata e retorna os dados
+
+            // Lista de dicionários para armazenar os resultados
+            var resultList = new List<Dictionary<string, object>>();
+
+            // Ler os dados e adicionar ao dicionário
+            while (reader.Read())
             {
-               
-                connection.Open();
+                var row = new Dictionary<string, object>();
 
-                String sSql = "SELECT * FROM Usuarios";
-
-                using (SqlCommand command = new SqlCommand(sSql, connection))
+                for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                        }
-                    }
-                }
-            }
+                    string columnName = reader.GetName(i);
+                    object value = reader.GetValue(i);
 
-            return new List<Dictionary<string, object>>();
+                    row[columnName] = value;
+                }
+
+                resultList.Add(row);
+            }
+            return resultList;
+
+            #endregion formata e retorna os dados
+        }
+
+        public static async Task<List<Dictionary<string, object>>> GetConsultaLoginAsync(string sSenha, string sEmail)
+        {
+            #region Abre connection
+
+            // Configurar a string de conexão com o banco de dados
+            string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
+
+            // Criar a conexão
+            using var connection = new NpgsqlConnection(connectionString);
+            //connection.Open();
+            await connection.OpenAsync();
+
+            #endregion Abre connection
+
+            #region Cria a string sql e faz a consulta
+            // Criar o comando SQL
+            using var command = connection.CreateCommand();
+            //monta a string sql
+            command.CommandText = $@"SELECT * FROM usuarios where ""PassWord"" = '{sSenha}' and ""Email"" = '{sEmail}'";
+
+            // Executar o comando e le os resultados
+            using var reader = command.ExecuteReader();
+
+            #endregion Cria a string sql e faz a consulta
+
+            #region formata e retorna os dados
+
+            // Lista de dicionários para armazenar os resultados
+            var resultList = new List<Dictionary<string, object>>();
+
+            // Ler os dados e adicionar ao dicionário
+            while (reader.Read())
+            {
+                var row = new Dictionary<string, object>();
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    string columnName = reader.GetName(i);
+                    object value = reader.GetValue(i);
+
+                    row[columnName] = value;
+                }
+
+                resultList.Add(row);
+            }
+            return resultList;
+
+            #endregion formata e retorna os dados
         }
     }
 }

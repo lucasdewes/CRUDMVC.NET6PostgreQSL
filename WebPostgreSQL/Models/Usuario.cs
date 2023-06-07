@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebPostgreSQL.Models
 {
@@ -13,7 +12,7 @@ namespace WebPostgreSQL.Models
 
         [Column("Nome")]
         [Display(Name = "Nome Completo")]
-        public string Nome{ get; set; }
+        public string Nome { get; set; }
 
         [Column("Email")]
         [Display(Name = "E-mail")]
