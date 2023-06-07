@@ -57,7 +57,7 @@ namespace WebPostgreSQL.Controllers
             }
             catch (Exception ex)
             {
-                ViewData["ValidateMessage"] = "Erro no Login(): " + ex.Message;
+                ViewData["ValidateMessage"] = "AccessController - Erro no Login(): " + ex.Message;
                 return View();
             }
         }

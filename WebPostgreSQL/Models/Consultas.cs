@@ -73,7 +73,7 @@ namespace WebPostgreSQL.Models
             // Criar o comando SQL
             using var command = connection.CreateCommand();
             //monta a string sql
-            command.CommandText = $@"SELECT * FROM usuarios where ""PassWord"" = '{sSenha}' and ""Email"" = '{sEmail}'";
+            command.CommandText = $@"SELECT * FROM ""Usuarios"" where ""PassWord"" = '{sSenha}' and ""Email"" = '{sEmail}'";
 
             // Executar o comando e le os resultados
             using var reader = command.ExecuteReader();

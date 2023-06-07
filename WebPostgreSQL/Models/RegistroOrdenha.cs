@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NpgsqlTypes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebPostgreSQL.Models
@@ -16,7 +17,7 @@ namespace WebPostgreSQL.Models
 
         [Column("DataOrdenha")]
         [Display(Name = "Data Ordenha")]
-        public DateTime DataOrdenha { get; set; }
+        public DateOnly DataOrdenha { get; set; }
 
         [Column("VolumeLeite")]
         [Display(Name = "Volume Leite")]

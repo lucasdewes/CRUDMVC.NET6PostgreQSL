@@ -22,7 +22,7 @@ sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
 
 
 var app = sqlConnectionStringBuilder.Build();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // COnfigura the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

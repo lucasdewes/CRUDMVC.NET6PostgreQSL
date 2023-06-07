@@ -1,4 +1,4 @@
-﻿@model WebPostgreSQL.Models.VMLogin;
+﻿@*@model WebPostgreSQL.Models.VMLogin;
 @{
     Layout = null;
 }
@@ -30,5 +30,97 @@
         }
 
     </form>
+</body>
+</html>
+*@
+
+@model WebPostgreSQL.Models.VMLogin;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #0069d9;
+            }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form asp-controller="Access" asp-action="Login" method="post">
+            <h1>Login</h1>
+            <input type="email" placeholder="Email" asp-for="Email" />
+            <input type="password" placeholder="Senha" asp-for="PassWord" />
+
+            <label>
+                <input type="checkbox" asp-for="KeepLoggedIn" />
+                Manter Logado
+            </label>
+            <button type="submit">Entrar</button>
+
+            @if (ViewData["ValidateMessage"] != null)
+            {
+                <br />
+                <br />
+                <label class="error-message">@ViewData["ValidateMessage"]</label>
+            }
+        </form>
+    </div>
 </body>
 </html>
