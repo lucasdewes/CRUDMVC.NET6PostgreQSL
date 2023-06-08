@@ -15,12 +15,13 @@ namespace WebPostgreSQL.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
         [Column("DataOrdenha")]
         [Display(Name = "Data Ordenha")]
-        public DateOnly DataOrdenha { get; set; }
+        public DateTime DataOrdenha { get; set; }
 
         [Column("VolumeLeite")]
         [Display(Name = "Volume Leite")]
-        public Decimal VolumeLeite { get; set; }
+        public decimal VolumeLeite { get; set; }
     }
 }
