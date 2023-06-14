@@ -1,4 +1,4 @@
-﻿@model WebPostgreSQL.Models.RegistroOrdenha
+﻿@model WebPostgreSQL.Models.RegistroOrdenhaModel
 
 @{
     ViewData["Title"] = "Create";
@@ -17,6 +17,13 @@
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
+            <label>Usuário</label>
+            <select name="UsuarioId" class="form-control">
+                @foreach (var item in Model.ListaUsuarios)
+                {
+                    <option value="@item.Id">@item.Nome</option>
+                }
+            </select>
             <div class="form-group">
                 <label asp-for="DataOrdenha" class="control-label"></label>
                 <input asp-for="DataOrdenha" class="form-control" type="date" />
@@ -24,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="VolumeLeite" class="control-label"></label>
-                <input asp-for="VolumeLeite" class="form-control" />
+                <input asp-for="VolumeLeite" class="form-control" step="any" />
                 <span asp-validation-for="VolumeLeite" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,4 +49,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="@Url.Content("~/js/jquery.validate.pt-Br.js")"></script>
 }

@@ -21,5 +21,6 @@ namespace WebPostgreSQL.Models
         [Column("PassWord")]
         [Display(Name = "PassWord")]
         public string PassWord { get; set; }
+
     }
 }

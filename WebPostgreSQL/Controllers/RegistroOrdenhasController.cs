@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 
@@ -21,9 +16,9 @@ namespace WebPostgreSQL.Controllers
         // GET: RegistroOrdenhas
         public async Task<IActionResult> Index()
         {
-              return _context.RegistroOrdenhas != null ? 
-                          View(await _context.RegistroOrdenhas.ToListAsync()) :
-                          Problem("Entity set 'Contexto.RegistroOrdenhas'  is null.");
+            return _context.RegistroOrdenhas != null ?
+                        View(await _context.RegistroOrdenhas.Include(a => a.usuario).ToListAsync()) :
+                        Problem("Entity set 'Contexto.RegistroOrdenhas'  is null.");
         }
 
         // GET: RegistroOrdenhas/Details/5
@@ -47,7 +42,9 @@ namespace WebPostgreSQL.Controllers
         // GET: RegistroOrdenhas/Create
         public IActionResult Create()
         {
-            return View();
+            RegistroOrdenhaModel model = new RegistroOrdenhaModel();
+            model.ListaUsuarios = _context.Usuarios.ToList();
+            return View(model);
         }
 
         // POST: RegistroOrdenhas/Create
@@ -55,15 +52,22 @@ namespace WebPostgreSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao,DataOrdenha,VolumeLeite")] RegistroOrdenha registroOrdenha)
+        public async Task<IActionResult> Create([Bind("Id,Descricao,DataOrdenha,VolumeLeite,UsuarioId")] RegistroOrdenhaModel registroOrdenha)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(registroOrdenha);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(registroOrdenha);
+            //foreach (var modelState in ModelState.Values)
+            //{
+            //    foreach (ModelError error in modelState.Errors)
+            //    {
+            //        Console.WriteLine(error.ToString());
+            //    }
+            //}
+            //if (ModelState.IsValid)
+            //{
+            _context.Add(registroOrdenha);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            //return View(registroOrdenha);
         }
 
         // GET: RegistroOrdenhas/Edit/5
@@ -87,15 +91,15 @@ namespace WebPostgreSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,DataOrdenha,VolumeLeite")] RegistroOrdenha registroOrdenha)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,DataOrdenha,VolumeLeite, UsuarioId")] RegistroOrdenha registroOrdenha)
         {
             if (id != registroOrdenha.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(registroOrdenha);
@@ -113,8 +117,8 @@ namespace WebPostgreSQL.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(registroOrdenha);
+            //}
+            //return View(registroOrdenha);
         }
 
         // GET: RegistroOrdenhas/Delete/5
@@ -149,14 +153,14 @@ namespace WebPostgreSQL.Controllers
             {
                 _context.RegistroOrdenhas.Remove(registroOrdenha);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RegistroOrdenhaExists(int id)
         {
-          return (_context.RegistroOrdenhas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.RegistroOrdenhas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

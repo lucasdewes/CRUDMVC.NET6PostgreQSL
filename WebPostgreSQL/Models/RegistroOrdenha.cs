@@ -1,4 +1,5 @@
 ﻿using NpgsqlTypes;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +16,6 @@ namespace WebPostgreSQL.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
         [Column("DataOrdenha")]
         [Display(Name = "Data Ordenha")]
         public DateTime DataOrdenha { get; set; }
@@ -23,5 +23,10 @@ namespace WebPostgreSQL.Models
         [Column("VolumeLeite")]
         [Display(Name = "Volume Leite")]
         public decimal VolumeLeite { get; set; }
+        
+        public int? UsuarioId { get; set; }
+
+        [Display(Name = "Responsável")]
+        public Usuario usuario { get; set; }
     }
 }
