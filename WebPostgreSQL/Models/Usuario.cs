@@ -19,7 +19,7 @@ namespace WebPostgreSQL.Models
         public string Email { get; set; }
 
         [Column("PassWord")]
-        [Display(Name = "PassWord")]
+        [Display(Name = "Senha")]
         public string PassWord { get; set; }
 
     }

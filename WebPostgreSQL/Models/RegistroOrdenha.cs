@@ -23,7 +23,8 @@ namespace WebPostgreSQL.Models
         [Column("VolumeLeite")]
         [Display(Name = "Volume Leite")]
         public decimal VolumeLeite { get; set; }
-        
+
+        [Display(Name = "Usuário responsável")]
         public int? UsuarioId { get; set; }
 
         [Display(Name = "Responsável")]
