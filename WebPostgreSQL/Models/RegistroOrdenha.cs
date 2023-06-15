@@ -29,5 +29,6 @@ namespace WebPostgreSQL.Models
 
         [Display(Name = "Responsável")]
         public Usuario usuario { get; set; }
+
     }
 }

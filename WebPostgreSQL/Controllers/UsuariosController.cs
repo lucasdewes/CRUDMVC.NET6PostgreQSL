@@ -22,7 +22,7 @@ namespace WebPostgreSQL.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Usuarios != null ? 
-                          View(await _context.Usuarios.ToListAsync()) :
+                          View(await _context.Usuarios.OrderBy(x => x.Nome).ToListAsync()) :
                           Problem("Entity set 'Contexto.Usuarios'  is null.");
         }
 
