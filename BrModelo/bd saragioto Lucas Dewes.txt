@@ -1,0 +1,58 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE Cidade (
+Id_Cidade SERIAL PRIMARY KEY,
+Descricao VARCHAR(70),
+UF CHAR(2)
+);
+
+CREATE TABLE Bairro (
+Id_Bairro SERIAL PRIMARY KEY,
+Descricao VARCHAR(50)
+);
+
+
+CREATE TABLE Rua (
+Id_Rua SERIAL PRIMARY KEY,
+Descricao VARCHAR(70)
+);
+
+CREATE TABLE Endereco (
+Id_Enderco SERIAL PRIMARY KEY,
+Id_Cidade INTEGER,
+Id_Rua INTEGER,
+Id_Bairro INTEGER,
+CEP CHAR(8),
+FOREIGN KEY(Id_Cidade) REFERENCES Cidade (Id_Cidade),
+FOREIGN KEY(Id_Rua) REFERENCES Rua (Id_Rua),
+FOREIGN KEY(Id_Bairro) REFERENCES Bairro (Id_Bairro)
+);
+
+CREATE TABLE Especialidade (
+Id_Especialidade SERIAL PRIMARY KEY,
+Nome VARCHAR(70)
+);
+
+
+CREATE TABLE Medico (
+Id_Medico SERIAL PRIMARY KEY,
+Id_Enderco INTEGER,
+CRM VARCHAR(10),
+Celular VARCHAR(20),
+Salario NUMERIC(7,2),
+Nome Varchar(70),
+FOREIGN KEY(Id_Enderco) REFERENCES Endereco (Id_Enderco)
+);
+
+CREATE TABLE Especialidade_Medico (
+Id_Medico INTEGER,
+Id_Especialidade INTEGER,
+DT_Inicio_Esp DATE,
+PRIMARY KEY(Id_Medico,Id_Especialidade),
+FOREIGN KEY(Id_Medico) REFERENCES Medico (Id_Medico),
+FOREIGN KEY(Id_Especialidade) REFERENCES Especialidade (Id_Especialidade)
+);
+
