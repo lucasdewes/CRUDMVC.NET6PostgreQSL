@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebPostgreSQL.Models;
@@ -11,9 +12,10 @@ using WebPostgreSQL.Models;
 namespace WebPostgreSQL.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230607182016_Tabela-RegistroOrdenha")]
+    partial class TabelaRegistroOrdenha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,16 +61,11 @@ namespace WebPostgreSQL.Migrations
                         .HasColumnType("text")
                         .HasColumnName("Descricao");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("integer");
-
                     b.Property<decimal>("VolumeLeite")
                         .HasColumnType("numeric")
                         .HasColumnName("VolumeLeite");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("RegistroOrdenha");
                 });
@@ -100,15 +97,6 @@ namespace WebPostgreSQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("WebPostgreSQL.Models.RegistroOrdenha", b =>
-                {
-                    b.HasOne("WebPostgreSQL.Models.Usuario", "usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("usuario");
                 });
 #pragma warning restore 612, 618
         }
