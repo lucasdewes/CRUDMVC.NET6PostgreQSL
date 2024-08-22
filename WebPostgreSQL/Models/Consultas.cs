@@ -5,6 +5,8 @@ namespace WebPostgreSQL.Models
 {
     public class Consultas
     {
+
+
         public static async Task<List<Dictionary<string, object>>> RodarComandoSQL(string sSQL)
         {
             #region Abre connection
@@ -58,7 +60,7 @@ namespace WebPostgreSQL.Models
         public static async Task<List<Dictionary<string, object>>> GetConsultaLoginAsync(string sSenha, string sEmail)
         {
             #region Abre connection
-
+            
             // Configurar a string de conexão com o banco de dados
             string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
@@ -85,7 +87,7 @@ namespace WebPostgreSQL.Models
             // Lista de dicionários para armazenar os resultados
             var resultList = new List<Dictionary<string, object>>();
 
-            // Ler os dados e adicionar ao dicionário
+            // Lê os dados e adicionar ao dicionário
             while (reader.Read())
             {
                 var row = new Dictionary<string, object>();

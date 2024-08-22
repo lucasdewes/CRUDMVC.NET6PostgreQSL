@@ -1,24 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dewes\\Desktop\\Projetos\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj": {}
+    "C:\\Users\\Dewes\\Desktop\\Lucas proj\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dewes\\Desktop\\Projetos\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj": {
+    "C:\\Users\\Dewes\\Desktop\\Lucas proj\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dewes\\Desktop\\Projetos\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj",
+        "projectUniqueName": "C:\\Users\\Dewes\\Desktop\\Lucas proj\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj",
         "projectName": "WebPostgreSQL",
-        "projectPath": "C:\\Users\\Dewes\\Desktop\\Projetos\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj",
+        "projectPath": "C:\\Users\\Dewes\\Desktop\\Lucas proj\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\WebPostgreSQL.csproj",
         "packagesPath": "C:\\Users\\Dewes\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dewes\\Desktop\\Projetos\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\obj\\",
+        "outputPath": "C:\\Users\\Dewes\\Desktop\\Lucas proj\\CRUDMVC.NET6PostgreQSL\\WebPostgreSQL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\Dewes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -43,8 +47,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -92,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -14,7 +14,10 @@ sqlConnectionStringBuilder.Services.AddAuthentication(CookieAuthenticationDefaul
     option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
 });
 
-const string _stringDeConnexao = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
+// Acesse a string de conexão do appsettings.json
+var _stringDeConnexao = sqlConnectionStringBuilder.Configuration.GetConnectionString("DefaultConnection");
+
+//const string _stringDeConnexao = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
 sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(option => option.UseNpgsql(_stringDeConnexao));
