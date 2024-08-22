@@ -1,4 +1,5 @@
-# CRUDMVC.NET6PostgreQSL
+# CRUDMVC com PostgreQSL criado em .NET6 
+# Projeto atualizado para .NET8
 
 Requisitos: 
   - É necessário banco PostgreSQL funcionando.
