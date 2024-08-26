@@ -1,12 +1,9 @@
-﻿using Microsoft.Data.SqlClient.Server;
-using Npgsql;
+﻿using Npgsql;
 
 namespace WebPostgreSQL.Models
 {
     public class Consultas
     {
-
-
         public static async Task<List<Dictionary<string, object>>> RodarComandoSQL(string sSQL)
         {
             #region Abre connection
@@ -22,6 +19,7 @@ namespace WebPostgreSQL.Models
             #endregion Abre connection
 
             #region Cria a string sql e faz a consulta
+
             // Criar o comando SQL
             using var command = connection.CreateCommand();
             //monta a string sql
@@ -60,7 +58,7 @@ namespace WebPostgreSQL.Models
         public static async Task<List<Dictionary<string, object>>> GetConsultaLoginAsync(string sSenha, string sEmail)
         {
             #region Abre connection
-            
+
             // Configurar a string de conexão com o banco de dados
             string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
@@ -72,6 +70,7 @@ namespace WebPostgreSQL.Models
             #endregion Abre connection
 
             #region Cria a string sql e faz a consulta
+
             // Criar o comando SQL
             using var command = connection.CreateCommand();
             //monta a string sql

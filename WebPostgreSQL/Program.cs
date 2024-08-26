@@ -23,7 +23,6 @@ sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(option => option.UseNpgsql(_stringDeConnexao));
 //.AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=CRUD_POSTGRE;User Id=postgres;Password=lucasdewes10;"));
 
-
 var app = sqlConnectionStringBuilder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // COnfigura the HTTP request pipeline.

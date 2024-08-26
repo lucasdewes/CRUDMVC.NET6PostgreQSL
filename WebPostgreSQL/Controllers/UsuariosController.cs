@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 
@@ -21,9 +16,9 @@ namespace WebPostgreSQL.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-              return _context.Usuarios != null ? 
-                          View(await _context.Usuarios.OrderBy(x => x.Nome).ToListAsync()) :
-                          Problem("Entity set 'Contexto.Usuarios'  is null.");
+            return _context.Usuarios != null ?
+                        View(await _context.Usuarios.OrderBy(x => x.Nome).ToListAsync()) :
+                        Problem("Entity set 'Contexto.Usuarios'  is null.");
         }
 
         // GET: Usuarios/Details/5
@@ -149,14 +144,14 @@ namespace WebPostgreSQL.Controllers
             {
                 _context.Usuarios.Remove(usuario);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-          return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

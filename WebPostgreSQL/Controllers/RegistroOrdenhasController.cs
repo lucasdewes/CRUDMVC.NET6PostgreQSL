@@ -100,23 +100,23 @@ namespace WebPostgreSQL.Controllers
 
             //if (ModelState.IsValid)
             //{
-                try
+            try
+            {
+                _context.Update(registroOrdenha);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RegistroOrdenhaExists(registroOrdenha.Id))
                 {
-                    _context.Update(registroOrdenha);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!RegistroOrdenhaExists(registroOrdenha.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
             //}
             //return View(registroOrdenha);
         }

@@ -5,7 +5,6 @@ namespace WebPostgreSQL.Models
 {
     public class Usuario
     {
-
         [Column("Id")]
         [Display(Name = "Código")]
         public int Id { get; set; }
@@ -21,6 +20,5 @@ namespace WebPostgreSQL.Models
         [Column("PassWord")]
         [Display(Name = "Senha")]
         public string PassWord { get; set; }
-
     }
 }

@@ -130,7 +130,7 @@ namespace WebPostgreSQL.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5 
+        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

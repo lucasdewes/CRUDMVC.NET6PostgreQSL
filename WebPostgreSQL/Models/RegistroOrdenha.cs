@@ -1,6 +1,4 @@
-﻿using NpgsqlTypes;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebPostgreSQL.Models
@@ -29,6 +27,5 @@ namespace WebPostgreSQL.Models
 
         [Display(Name = "Responsável")]
         public Usuario usuario { get; set; }
-
     }
 }
