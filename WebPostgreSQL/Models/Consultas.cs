@@ -55,12 +55,19 @@ namespace WebPostgreSQL.Models
             #endregion formata e retorna os dados
         }
 
+        /// <summary>
+        /// Abre connection, cria a querry e faz a busca na tabela de usuários
+        /// </summary>
+        /// <param name="sSenha"></param>
+        /// <param name="sEmail"></param>
+        /// <returns></returns>
         public static async Task<List<Dictionary<string, object>>> GetConsultaLoginAsync(string sSenha, string sEmail)
         {
             #region Abre connection
 
             // Configurar a string de conexão com o banco de dados
             string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
+            //string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
             // Criar a conexão
             using var connection = new NpgsqlConnection(connectionString);
@@ -98,9 +105,10 @@ namespace WebPostgreSQL.Models
 
                     row[columnName] = value;
                 }
-
+                //vai inserindo na lista
                 resultList.Add(row);
             }
+            //retorna a lista de dicionários
             return resultList;
 
             #endregion formata e retorna os dados
