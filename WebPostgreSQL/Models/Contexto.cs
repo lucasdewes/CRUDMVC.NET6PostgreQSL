@@ -11,5 +11,6 @@ namespace WebPostgreSQL.Models
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<RegistroOrdenha> RegistroOrdenhas { get; set; }
+        public DbSet<Animal> Animais { get; set; }
     }
 }
