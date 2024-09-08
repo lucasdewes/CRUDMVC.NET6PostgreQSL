@@ -17,5 +17,8 @@ namespace WebPostgreSQL.Models
         [Column("Nascimento")]
         [Display(Name = "Nascimento")]
         public DateTime Nascimento { get; set; }
+
+        // Relacionamento muitos-para-muitos com Ordenha
+        public ICollection<OrdenhaAnimal>? OrdenhaAnimais { get; set; }
     }
 }

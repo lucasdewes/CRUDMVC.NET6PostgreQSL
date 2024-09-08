@@ -26,6 +26,9 @@ namespace WebPostgreSQL.Models
         public int? UsuarioId { get; set; }
 
         [Display(Name = "Responsável")]
-        public Usuario usuario { get; set; }
+        public Usuario? usuario { get; set; }
+
+        // Relacionamento muitos-para-muitos com Animal
+        public ICollection<OrdenhaAnimal>? OrdenhaAnimais { get; set; }
     }
 }

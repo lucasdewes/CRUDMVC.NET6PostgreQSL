@@ -1,90 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebPostgreSQL.Models;
 
 namespace WebPostgreSQL.Controllers
 {
-    public class UsuariosController : Controller
+    public class AnimalsController : Controller
     {
         private readonly DbContextAplicacao _context;
 
-        public UsuariosController(DbContextAplicacao context)
+        public AnimalsController(DbContextAplicacao context)
         {
             _context = context;
         }
 
-        // GET: Usuarios
+        // GET: Animals
         public async Task<IActionResult> Index()
         {
-            return _context.Usuarios != null ?
-                        View(await _context.Usuarios.OrderBy(x => x.Nome).ToListAsync()) :
-                        Problem("Entity set 'Contexto.Usuarios'  is null.");
+            return View(await _context.Animais.ToListAsync());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Animals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
+            var animal = await _context.Animais
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            if (animal == null)
             {
                 return NotFound();
             }
 
-            return View(usuario);
+            return View(animal);
         }
 
-        // GET: Usuarios/Create
+        // GET: Animals/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Animals/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,PassWord")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,SISBOV,Nascimento")] Animal animal)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(usuario);
+                _context.Add(animal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
+            return View(animal);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Animals/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null)
+            var animal = await _context.Animais.FindAsync(id);
+            if (animal == null)
             {
                 return NotFound();
             }
-            return View(usuario);
+            return View(animal);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Animals/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,PassWord")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SISBOV,Nascimento")] Animal animal)
         {
-            if (id != usuario.Id)
+            if (id != animal.Id)
             {
                 return NotFound();
             }
@@ -93,12 +96,12 @@ namespace WebPostgreSQL.Controllers
             {
                 try
                 {
-                    _context.Update(usuario);
+                    _context.Update(animal);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.Id))
+                    if (!AnimalExists(animal.Id))
                     {
                         return NotFound();
                     }
@@ -109,49 +112,45 @@ namespace WebPostgreSQL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
+            return View(animal);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Animals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Usuarios == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios
+            var animal = await _context.Animais
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
+            if (animal == null)
             {
                 return NotFound();
             }
 
-            return View(usuario);
+            return View(animal);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Animals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Usuarios == null)
+            var animal = await _context.Animais.FindAsync(id);
+            if (animal != null)
             {
-                return Problem("Entity set 'Contexto.Usuarios'  is null.");
-            }
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
-            {
-                _context.Usuarios.Remove(usuario);
+                _context.Animais.Remove(animal);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UsuarioExists(int id)
+        private bool AnimalExists(int id)
         {
-            return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Animais.Any(e => e.Id == id);
         }
     }
 }

@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.VolumeLeite)
             </th>
+            <th>
+                Animais
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,13 +38,29 @@
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
                 <td>
-                    @(item.usuario.Nome as string)
+                    @(item.usuario?.Nome ?? "N/A")
                 </td>
                 <td>
                     @item.DataOrdenha.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VolumeLeite)
+                </td>
+                <td>
+                    <!-- Exibe os animais associados -->
+                    @if (item.OrdenhaAnimais != null && item.OrdenhaAnimais.Any())
+                    {
+                        @foreach (var ordenhaAnimal in item.OrdenhaAnimais)
+                        {
+                            <span>@ordenhaAnimal.Animal.SISBOV</span>
+
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                        <span>Nenhum animal associado</span>
+                    }
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

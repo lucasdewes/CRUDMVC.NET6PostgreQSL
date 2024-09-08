@@ -6,9 +6,9 @@ namespace WebPostgreSQL.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly Contexto _context;
+        private readonly DbContextAplicacao _context;
 
-        public ProdutosController(Contexto context)
+        public ProdutosController(DbContextAplicacao context)
         {
             _context = context;
         }

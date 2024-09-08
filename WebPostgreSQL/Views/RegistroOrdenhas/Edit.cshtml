@@ -1,4 +1,5 @@
-﻿@model WebPostgreSQL.Models.RegistroOrdenha
+﻿@model WebPostgreSQL.Models.RegistroOrdenhaModel
+
 @{
     ViewData["Title"] = "Edit";
 }
@@ -12,6 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
                 <input asp-for="Descricao" class="form-control" />
@@ -19,22 +21,33 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <input asp-for="UsuarioId" class="form-control" />
+                <label asp-for="UsuarioId" class="control-label">Usuário Responsável</label>
+                <select asp-for="UsuarioId" class="form-control" asp-items="@(new SelectList(Model.ListaUsuarios, "Id", "Nome"))">
+                    <option value="">Selecione um usuário</option>
+                </select>
                 <span asp-validation-for="UsuarioId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="DataOrdenha" class="control-label"></label>
-                <input asp-for="DataOrdenha" class="form-control"/>
+                <input asp-for="DataOrdenha" class="form-control" type="date" />
                 <span asp-validation-for="DataOrdenha" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="VolumeLeite" class="control-label"></label>
-                <input asp-for="VolumeLeite" class="form-control" />
+                <input asp-for="VolumeLeite" class="form-control" step="any" />
                 <span asp-validation-for="VolumeLeite" class="text-danger"></span>
             </div>
-            <label> </label>
+
+            <!-- Seleção múltipla de Animais -->
+            <div class="form-group">
+                <label asp-for="AnimaisSelecionadosIds" class="control-label">Animais</label>
+                <select asp-for="AnimaisSelecionadosIds" class="form-control select2" asp-items="@(new MultiSelectList(Model.ListaAnimais, "Id", "SISBOV"))" multiple="multiple">
+                </select>
+                <span asp-validation-for="AnimaisSelecionadosIds" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
@@ -51,4 +64,13 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script src="@Url.Content("~/js/jquery.validate.pt-Br.js")"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Selecione os animais",
+                allowClear: true
+            });
+        });
+    </script>
 }

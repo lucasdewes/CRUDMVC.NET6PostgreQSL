@@ -8,9 +8,9 @@ namespace WebPostgreSQL.Controllers
 {
     public class AccessController : Controller
     {
-        private readonly Contexto _context;
+        private readonly DbContextAplicacao _context;
 
-        public AccessController(Contexto context)
+        public AccessController(DbContextAplicacao context)
         {
             _context = context;
         }

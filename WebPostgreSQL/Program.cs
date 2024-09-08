@@ -22,7 +22,7 @@ var _stringDeConnexao = sqlConnectionStringBuilder.Configuration.GetConnectionSt
 //const string _stringDeConnexao = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
 sqlConnectionStringBuilder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<Contexto>(option => option.UseNpgsql(_stringDeConnexao));
+    .AddDbContext<DbContextAplicacao>(option => option.UseNpgsql(_stringDeConnexao));
 //.AddDbContext<Contexto>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=CRUD_POSTGRE;User Id=postgres;Password=lucasdewes10;"));
 
 var app = sqlConnectionStringBuilder.Build();
