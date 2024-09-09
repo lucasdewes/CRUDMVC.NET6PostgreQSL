@@ -50,7 +50,7 @@ namespace WebPostgreSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Produto produto)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Quantidade,UnidadeMedida")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace WebPostgreSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Quantidade,UnidadeMedida")] Produto produto)
         {
             if (id != produto.Id)
             {

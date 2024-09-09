@@ -13,5 +13,10 @@ namespace WebPostgreSQL.Models
         [Column("Nome")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
+
+        public decimal Quantidade { get; set; }
+
+        [StringLength(50)]
+        public string UnidadeMedida { get; set; }
     }
 }

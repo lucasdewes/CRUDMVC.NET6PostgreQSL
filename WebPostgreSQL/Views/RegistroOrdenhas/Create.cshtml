@@ -29,7 +29,7 @@
                 <span asp-validation-for="DataOrdenha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VolumeLeite" class="control-label"></label>
+                Volume de leite em ml
                 <input asp-for="VolumeLeite" class="form-control" step="any" />
                 <span asp-validation-for="VolumeLeite" class="text-danger"></span>
             </div>
@@ -41,14 +41,14 @@
                 </select>
                 <span asp-validation-for="AnimaisSelecionadosIds" class="text-danger"></span>
             </div>
-
+            <br />
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index">Voltar a lista</a>
 </div>

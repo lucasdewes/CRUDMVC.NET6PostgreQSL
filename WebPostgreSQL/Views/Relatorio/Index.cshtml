@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebPostgreSQL.Models.ProducoesLeite>
+
+@{
+    ViewData["Title"] = "Relatório de Produção";
+}
+
+<h1>Relatório de Produção</h1>
+
+<form asp-action="Pesquisar" method="post">
+    <div class="form-group">
+        <label for="dataInicio">Data Inicial</label>
+        <input type="date" class="form-control" id="dataInicio" name="dataInicio" value="@ViewData["DataInicio"]" required />
+    </div>
+    <div class="form-group">
+        <label for="dataFim">Data Final</label>
+        <input type="date" class="form-control" id="dataFim" name="dataFim" value="@ViewData["DataFim"]" required />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Pesquisar</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Id do Animal</th>
+                <th>SISBOV</th>
+                <th>Volume Total de Leite</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdAnimal</td>
+                    <td>@item.SISBOV</td>
+                    <td>@item.VolumeTotalLeite.ToString("F2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
