@@ -12,8 +12,8 @@ using WebPostgreSQL.Models;
 namespace WebPostgreSQL.Migrations
 {
     [DbContext(typeof(DbContextAplicacao))]
-    [Migration("20240813010748_primeira_migration_notebook")]
-    partial class primeira_migration_notebook
+    [Migration("20240906205034_CriarTabelaAnimal")]
+    partial class CriarTabelaAnimal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,29 @@ namespace WebPostgreSQL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("WebPostgreSQL.Models.Animal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Nascimento")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("Nascimento");
+
+                    b.Property<string>("SISBOV")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("SISBOV");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Animal");
+                });
 
             modelBuilder.Entity("WebPostgreSQL.Models.Produto", b =>
                 {

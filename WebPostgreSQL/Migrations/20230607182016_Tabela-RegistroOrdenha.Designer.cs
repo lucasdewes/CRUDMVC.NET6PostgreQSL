@@ -11,7 +11,7 @@ using WebPostgreSQL.Models;
 
 namespace WebPostgreSQL.Migrations
 {
-    [DbContext(typeof(Contexto))]
+    [DbContext(typeof(DbContextAplicacao))]
     [Migration("20230607182016_Tabela-RegistroOrdenha")]
     partial class TabelaRegistroOrdenha
     {

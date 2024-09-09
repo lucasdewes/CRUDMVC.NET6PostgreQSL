@@ -10,7 +10,7 @@ using WebPostgreSQL.Models;
 
 namespace WebPostgreSQL.Migrations
 {
-    [DbContext(typeof(Contexto))]
+    [DbContext(typeof(DbContextAplicacao))]
     [Migration("20220619185448_Criacao-Inicial")]
     partial class CriacaoInicial
     {

@@ -11,7 +11,7 @@ using WebPostgreSQL.Models;
 
 namespace WebPostgreSQL.Migrations
 {
-    [DbContext(typeof(Contexto))]
+    [DbContext(typeof(DbContextAplicacao))]
     [Migration("20230614173439_relacao_Usuario_RegOrdenha")]
     partial class relacao_Usuario_RegOrdenha
     {

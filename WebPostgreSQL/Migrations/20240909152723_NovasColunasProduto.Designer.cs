@@ -12,17 +12,56 @@ using WebPostgreSQL.Models;
 namespace WebPostgreSQL.Migrations
 {
     [DbContext(typeof(DbContextAplicacao))]
-    [Migration("20240813010748_primeira_migration_notebook")]
-    partial class primeira_migration_notebook
+    [Migration("20240909152723_NovasColunasProduto")]
+    partial class NovasColunasProduto
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.16")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("WebPostgreSQL.Models.Animal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Nascimento")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("Nascimento");
+
+                    b.Property<string>("SISBOV")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("SISBOV");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("WebPostgreSQL.Models.OrdenhaAnimal", b =>
+                {
+                    b.Property<int>("OrdenhaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("OrdenhaId", "AnimalId");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("OrdenhaAnimais");
+                });
 
             modelBuilder.Entity("WebPostgreSQL.Models.Produto", b =>
                 {
@@ -37,6 +76,14 @@ namespace WebPostgreSQL.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Nome");
+
+                    b.Property<decimal>("Quantidade")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("UnidadeMedida")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
@@ -104,6 +151,25 @@ namespace WebPostgreSQL.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("WebPostgreSQL.Models.OrdenhaAnimal", b =>
+                {
+                    b.HasOne("WebPostgreSQL.Models.Animal", "Animal")
+                        .WithMany("OrdenhaAnimais")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebPostgreSQL.Models.RegistroOrdenha", "Ordenha")
+                        .WithMany("OrdenhaAnimais")
+                        .HasForeignKey("OrdenhaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Ordenha");
+                });
+
             modelBuilder.Entity("WebPostgreSQL.Models.RegistroOrdenha", b =>
                 {
                     b.HasOne("WebPostgreSQL.Models.Usuario", "usuario")
@@ -111,6 +177,16 @@ namespace WebPostgreSQL.Migrations
                         .HasForeignKey("UsuarioId");
 
                     b.Navigation("usuario");
+                });
+
+            modelBuilder.Entity("WebPostgreSQL.Models.Animal", b =>
+                {
+                    b.Navigation("OrdenhaAnimais");
+                });
+
+            modelBuilder.Entity("WebPostgreSQL.Models.RegistroOrdenha", b =>
+                {
+                    b.Navigation("OrdenhaAnimais");
                 });
 #pragma warning restore 612, 618
         }
