@@ -67,7 +67,6 @@ namespace WebPostgreSQL.Models
 
             // Configurar a string de conexão com o banco de dados
             string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
-            //string connectionString = "Host=localhost;Port=5432;Pooling=true;Database=SISTEMALEITE;User Id=postgres;Password=admin;";
 
             // Criar a conexão
             using var connection = new NpgsqlConnection(connectionString);

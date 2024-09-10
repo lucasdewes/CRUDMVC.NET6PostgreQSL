@@ -14,6 +14,8 @@ namespace WebPostgreSQL.Models
         public DbSet<Animal> Animais { get; set; }
         public DbSet<OrdenhaAnimal> OrdenhaAnimais { get; set; }
 
+
+        //não da erro ao apagar, apaga das 2
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

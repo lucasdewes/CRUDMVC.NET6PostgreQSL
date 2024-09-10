@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using WebPostgreSQL.Models;
 
 namespace WebPostgreSQL.Controllers
@@ -139,14 +140,32 @@ namespace WebPostgreSQL.Controllers
             {
                 return Problem("Entity set 'Contexto.Usuarios'  is null.");
             }
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario != null)
+            try
             {
-                _context.Usuarios.Remove(usuario);
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if (usuario != null)
+                {
+                    _context.Usuarios.Remove(usuario);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (DbUpdateException ex)
+            {
+                // Verifica se a exceção é uma violação de chave estrangeira
+                if (ex.InnerException is PostgresException postgresEx && postgresEx.SqlState == "23503")
+                {
+                    // Adiciona uma mensagem amigável ao TempData
+                    TempData["MensagemErro"] = "Não é possível excluir o usuário, pois ele está sendo referenciado em outros registros.";
+                    return RedirectToAction(nameof(Index)); // Redireciona para a página Index com a mensagem de erro
+                }
+
+                // Lança a exceção original se for outro tipo de erro
+                throw;
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
