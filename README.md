@@ -1,14 +1,14 @@
 
 # CRUD MVC com PostgreSQL em .NET 8
 
-Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity Framework Core, PostgreSQL, e Blazor para a interface do usuário.
+Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity Framework Core, PostgreSQL, e Razor Views para a interface do usuário.
 
 ## Tecnologias Utilizadas
 
 - **.NET 8**: Framework principal para desenvolvimento backend.
 - **Entity Framework Core**: Para mapeamento objeto-relacional (ORM) e controle do banco de dados.
 - **PostgreSQL**: Banco de dados utilizado para armazenar as informações.
-- **Blazor**: Framework da Microsoft para a construção de interfaces web dinâmicas.
+- **ASP.NET Core com Razor Views**: Framework da Microsoft para construção de interfaces web dinâmicas utilizando páginas Razor e a engine de views do ASP.NET.
 - **Bootstrap**: Para o design responsivo e estilização da interface.
 - **C#**: Linguagem de programação principal do projeto.
 - **Visual Studio 2022**: IDE recomendada para desenvolvimento e execução do projeto.
@@ -52,7 +52,7 @@ Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity F
 
 - **Models**: Definições de classes que representam as tabelas do banco de dados.
 - **Controllers**: Controladores responsáveis pelas operações CRUD e lógica do sistema.
-- **Views**: Interface com o usuário construída com Blazor e Razor Pages.
+- **Views**: Interface com o usuário construída com Razor Pages.
 - **Migrations**: Arquivos gerados pelo Entity Framework para manter o banco de dados atualizado com base nos modelos.
 
 ## Contribuições
