@@ -22,7 +22,7 @@ Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity F
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   https://github.com/lucasdewes/CRUDMVC.NET6PostgreQSL.git
    ```
 
 2. Abra a solução no Visual Studio 2022 (arquivo `.sln`).
