@@ -1,5 +1,5 @@
-CRUD MVC com PostgreSQL em .NET 8
-Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity Framework Core, PostgreSQL, e tecnologias modernas como Blazor para a interface do usuário.
+#CRUD MVC com PostgreSQL em .NET 8
+#Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity Framework Core, PostgreSQL, e tecnologias modernas como Blazor para a interface do usuário.
 
 Tecnologias Utilizadas
 .NET 8: Framework principal para desenvolvimento backend.
@@ -16,6 +16,7 @@ Como rodar o projeto
 Clone este repositório:
 
 git clone https://github.com/lucasdewes/CRUDMVC.NET6PostgreQSL.git
+
 Abra a solução no Visual Studio 2022 (arquivo .sln).
 
 Restaure os pacotes NuGet da solução:
