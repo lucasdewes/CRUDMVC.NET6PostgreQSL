@@ -30,7 +30,7 @@ Este projeto é uma aplicação CRUD desenvolvida em .NET 8, utilizando Entity F
 3. Restaure os pacotes NuGet da solução:
    - No Visual Studio, clique com o botão direito na solução e escolha "Restaurar pacotes NuGet".
 
-4. Configure a string de conexão em `Program.cs` e `Consultas.cs` com as informações do seu banco PostgreSQL.
+4. Configure a string de conexão em `Program.cs`, `appsettings.json` e `Consultas.cs` com as informações do seu banco PostgreSQL.
 
 5. Crie e aplique as migrations para atualizar o banco de dados:
    - Abra o **Package Manager Console** e execute:
