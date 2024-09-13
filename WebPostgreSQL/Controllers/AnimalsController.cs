@@ -141,6 +141,13 @@ namespace WebPostgreSQL.Controllers
             var animal = await _context.Animais.FindAsync(id);
             if (animal != null)
             {
+                var bAnimalEmUso = await _context.OrdenhaAnimais.AnyAsync(oa => oa.AnimalId == id);
+                if (bAnimalEmUso)
+                {
+                    TempData["ErroExcluir"] = "Este animal está associado a uma ou mais ordenhas e não pode ser excluído.";
+                    return RedirectToAction(nameof(Index)); // Redireciona para a página de listagem
+                }
+
                 _context.Animais.Remove(animal);
             }
 
